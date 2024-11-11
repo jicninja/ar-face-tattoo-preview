@@ -32,6 +32,7 @@
   "dependencies": {
     "@babel/runtime": "^7.24.6",
     "@tamagui/cli": "^1.116.14",
+    "axios": "^1.7.7",
     "check-dependency-version-consistency": "^4.1.0",
     "eslint": "^9.3.0",
     "husky": "^9.1.6",
