@@ -1,6 +1,6 @@
 import Script from 'next/script'
 import { useEffect } from 'react'
-
+import { FloatingHeading, Author } from '@my/ui'
 import Canvas from './components/canvas'
 
 export default function Page() {
@@ -862,6 +862,9 @@ export default function Page() {
       <Script src={'./js/WebARRocksFaceShape2DHelper.js'} async type="text/javascript"></Script>
       <Script src={'./js/WebARRocksLMStabilizer2.js'} async type="text/javascript"></Script>
       <Script src={'./js/WebARRocksResizer.js'} async type="text/javascript"></Script>
+
+      <FloatingHeading />
+      <Author />
 
       <Canvas overlay id="WebARRocksFaceCanvasAR" />
       <Canvas id="WebARRocksFaceCanvasVideo" />

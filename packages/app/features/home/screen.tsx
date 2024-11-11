@@ -9,6 +9,7 @@ import {
   SwitchThemeButton,
   XStack,
   YStack,
+  Stack,
 } from '@my/ui'
 import { ChevronDown, ChevronUp, X } from '@tamagui/lucide-icons'
 import { useState } from 'react'
@@ -47,7 +48,14 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
           An Augmented Reality Tattoo Previewer Proof of Concept by Ignacio Castro for CoCreate.
         </Paragraph>
         <Separator />
-        <Paragraph ta="center">Made with Love, powered by AI</Paragraph>
+        <XStack>
+          <Paragraph flex={1} margin={'$0'} ta="center">
+            Made with Love ♥️
+          </Paragraph>
+          <Paragraph flex={1} margin={'$0'} ta="center">
+            Powered by AI 🤖
+          </Paragraph>
+        </XStack>
         <Separator />
       </YStack>
 
