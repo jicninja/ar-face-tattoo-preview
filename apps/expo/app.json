@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "AR Face Tattoo Preview",
+    "name": "AR Face Tattoo",
     "slug": "ArFaceTattooPreviewCoCreate",
     "scheme": "ArFaceTattooPreviewCoCreate",
     "version": "1.0.0",
@@ -18,7 +18,10 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ignacio.ar.face.tattoo.app"
+      "bundleIdentifier": "com.ignacio.ar.face.tattoo.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera for AR."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +33,18 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-font"],
+
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access the microphone",
+          "speechRecognitionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     }

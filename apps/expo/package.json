@@ -14,6 +14,7 @@
     "@babel/runtime": "^7.24.6",
     "@expo/config-plugins": "~8.0.4",
     "@my/ui": "0.0.1",
+    "@react-native-voice/voice": "^3.2.4",
     "app": "0.0.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "burnt": "^0.12.2",
@@ -34,7 +35,8 @@
     "react-native-safe-area-context": "4.10.4",
     "react-native-screens": "~3.31.1",
     "react-native-svg": "15.3.0",
-    "react-native-web": "~0.19.12"
+    "react-native-web": "~0.19.12",
+    "react-native-webview": "13.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.24.6",

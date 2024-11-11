@@ -9,17 +9,15 @@ import {
   SwitchThemeButton,
   XStack,
   YStack,
-  Stack,
 } from '@my/ui'
-import { ChevronDown, ChevronUp, X } from '@tamagui/lucide-icons'
+import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import { Platform } from 'react-native'
 import { useLink } from 'solito/navigation'
 
 export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
-  const linkTarget = pagesMode ? '/pages-example-user' : '/user'
   const linkProps = useLink({
-    href: `${linkTarget}/nate`,
+    href: `/ar`,
   })
 
   return (
@@ -59,7 +57,7 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
         <Separator />
       </YStack>
 
-      <Button {...linkProps}>Link to user</Button>
+      <Button {...linkProps}>Go to AR</Button>
 
       <SheetDemo />
     </YStack>

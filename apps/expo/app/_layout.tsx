@@ -35,11 +35,9 @@ export default function App() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme()
-
   return (
     <Provider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={DarkTheme}>
         <Stack />
         <NativeToast />
       </ThemeProvider>
