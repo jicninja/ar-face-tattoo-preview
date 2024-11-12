@@ -5,7 +5,7 @@
   "packageManager": "yarn@4.5.1",
   "scripts": {
     "dev": "next dev",
-    "build": "cd ../.. && yarn build && cd apps/next && next build",
+    "build": "NODE_ENV=development cd ../.. && yarn build && cd apps/next && next build",
     "start": "next start",
     "serve": "NODE_ENV=production next start --port 8151",
     "lint": "next lint",

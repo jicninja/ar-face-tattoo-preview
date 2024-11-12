@@ -30,14 +30,11 @@ const useARCamera = ({
     setIsTextureLoading(true)
 
     try {
-      const { data } = await axios.get(`./api/imagine?prompt=${prompt}`)
+      const { data } = await axios.get(`./api/imagine`, { params: { prompt } })
 
-      /*
       currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
         data.image
       )
-
-      */
     } catch (err) {
       console.error(err)
     }
