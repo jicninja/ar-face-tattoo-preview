@@ -828,10 +828,15 @@ export default function Page() {
         canvasVideo: _canvasVideo,
         canvasAR: _canvasAR,
         shapes: [SHAPEFACE],
+        updateCallback: async (spec) => {
+          console.log('debug', spec)
+
+          return 'pause'
+        },
         //,videoURL: '../../../../testVideos/1032526922-hd.mov'
       })
-        .then(function () {
-          console.log('READY')
+        .then(function (_gl) {
+          console.log('READY', _gl)
         })
         .catch(function (err) {
           throw new Error(err)
