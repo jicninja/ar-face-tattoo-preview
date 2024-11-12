@@ -2,6 +2,7 @@ import { WebView } from 'react-native-webview'
 import { StyleSheet } from 'react-native'
 import { useRef } from 'react'
 import { Button } from 'tamagui'
+import { VoiceToText } from '../voiceToText'
 
 const URL = 'https://www.arfacetattoo.online/ar'
 
@@ -18,14 +19,14 @@ function getInjectableJSMessage(message) {
 export const ARView = () => {
   const webviewRef = useRef<WebView>(null)
 
-  function sendDataToWebView() {
+  const sendDataToWebView = () => {
     webviewRef.current?.injectJavaScript(getInjectableJSMessage('Hello'))
   }
 
   return (
     <>
       <Button onPress={() => sendDataToWebView()}>Enviar mensaje</Button>
-
+      <VoiceToText />
       <WebView
         ref={webviewRef}
         javaScriptEnabled

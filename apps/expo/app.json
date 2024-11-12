@@ -35,8 +35,8 @@
     },
 
     "plugins": [
-      "expo-router",
-      "expo-font",
+      ["expo-router"],
+      ["expo-font"],
       [
         "@react-native-voice/voice",
         {
