@@ -19,12 +19,13 @@ const useARCamera = ({
   canvasEffectId = 'WebARRocksFaceCanvasAR',
 }: ArCameraProps) => {
   const isARLoading = useRef<boolean>(true)
+  const savedPrompt = useRef<string>()
   const [isTextureLoading, setIsTextureLoading] = useState<boolean>(false)
 
   const currentTexture = useRef<WebGLTexture>()
 
   const unOptimizedImagineTattoo = useCallback(async (prompt: string) => {
-    if (isTextureLoading || isARLoading.current || !prompt) {
+    if (isTextureLoading || isARLoading.current || !prompt || savedPrompt.current === prompt) {
       return
     }
 
@@ -32,6 +33,8 @@ const useARCamera = ({
 
     try {
       const { data } = await axios.get(`./api/imagine`, { params: { prompt }, timeout: 600000 })
+
+      savedPrompt.current = prompt
 
       currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
         data.image

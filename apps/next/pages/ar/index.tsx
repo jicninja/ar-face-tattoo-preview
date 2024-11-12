@@ -1,6 +1,7 @@
 import { FloatingHeading, Author } from '@my/ui'
 
 import { useARCamera } from '../../hooks/useARCamera'
+import { usePostMessage } from '../../hooks/usePostMessage'
 
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
@@ -11,6 +12,8 @@ const CANVAS_CAMERA_ID = 'WebARRocksFaceCanvasVideo'
 const CANVAS_EFFECT_ID = 'WebARRocksFaceCanvasAR'
 
 export default function Page() {
+  usePostMessage()
+
   const { isTextureLoading, imagineTattoo } = useARCamera({
     canvasCameraId: CANVAS_CAMERA_ID,
     canvasEffectId: CANVAS_EFFECT_ID,
