@@ -28,9 +28,8 @@ export function HomeScreen() {
   return (
     <ScrollView
       gap="$8"
-      p="$4"
-      bg="$background"
       contentContainerStyle={{
+        backgroundColor: 'rgba(0,0,0, 0.75)',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',

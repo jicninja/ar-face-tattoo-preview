@@ -13,6 +13,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // You can use `suppressHydrationWarning` to avoid the warning about mismatched content during hydration in dev mode
     <html lang="en" suppressHydrationWarning>
       <body>
+        <iframe
+          style={{
+            position: 'fixed',
+            height: '100%',
+            width: '100%',
+            left: '0',
+            top: '0',
+            zIndex: 0,
+            border: 0,
+          }}
+          src={'https://jicninja.github.io/cool-background/'}
+        ></iframe>
         <NextTamaguiProvider>{children}</NextTamaguiProvider>
       </body>
     </html>
