@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import axios from 'axios'
 
 import { SHAPEFACE } from './constants'
+import { useDebounce } from 'tamagui'
 
 declare global {
   var WebARRocksResizer: any
@@ -22,27 +23,27 @@ const useARCamera = ({
 
   const currentTexture = useRef<WebGLTexture>()
 
-  const imagineTattoo = useCallback(async (prompt: string) => {
-    if (isTextureLoading || !prompt) {
+  const unOptimizedImagineTattoo = useCallback(async (prompt: string) => {
+    if (isTextureLoading || !isARLoading.current || !prompt) {
       return
     }
 
-    //setIsTextureLoading(true)
+    setIsTextureLoading(true)
 
     try {
       const { data } = await axios.get(`./api/imagine`, { params: { prompt }, timeout: 600000 })
 
-      if (!isARLoading.current) {
-        currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
-          data.image
-        )
-      }
+      currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
+        data.image
+      )
     } catch (err) {
       console.error(err)
     } finally {
-      //setIsTextureLoading(false)
+      setIsTextureLoading(false)
     }
   }, [])
+
+  const imagineTattoo = useDebounce(unOptimizedImagineTattoo, 100)
 
   useEffect(() => {
     if (!isARLoading.current) {
