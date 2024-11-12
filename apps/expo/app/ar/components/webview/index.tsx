@@ -25,7 +25,13 @@ export const ARView = () => {
   return (
     <>
       <VoiceToText onVoice={(text) => sendDataToWebView(text.replaceAll(' ', '_'))} />
-      <WebView ref={webviewRef} javaScriptEnabled style={styles.webview} source={{ uri: URL }} />
+      <WebView
+        allowsInlineMediaPlayback
+        ref={webviewRef}
+        javaScriptEnabled
+        style={styles.webview}
+        source={{ uri: URL }}
+      />
     </>
   )
 }

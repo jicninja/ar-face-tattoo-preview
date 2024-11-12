@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "a78a948f-8632-4d15-98ab-94079843ba71"
+      }
+    },
+    "android": {
+      "package": "com.ignacio.ar.face.tattoo.app"
+    }
+  }
+}
