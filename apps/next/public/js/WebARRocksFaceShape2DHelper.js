@@ -575,7 +575,19 @@ const WebARRocksFaceShape2DHelper = (function () {
     _glv.flush()
   }
 
-  function draw_shape(landmarksPositions, shape) {
+  let newTexture
+
+  async function draw_shape(landmarksPositions, shape) {
+    if (_spec.updateCallback) {
+      if ((await _spec.updateCallback(shape, create_glImageTexture)) === 'pause') {
+        return
+      }
+    }
+
+    //console.log('debug--->', _spec)
+
+    //return
+
     _gl.useProgram(shape.shp.program)
 
     // set uniforms:
@@ -646,10 +658,17 @@ const WebARRocksFaceShape2DHelper = (function () {
     }
 
     // bind textures:
-    shape.textures.forEach(function (glTexture, ind) {
+    shape.textures.forEach(async function (glTexture, ind) {
       _gl.uniform1i(shape.shp.uniforms.texturesSamplers[ind], ind + 1)
       _gl.activeTexture([_gl.TEXTURE1, _gl.TEXTURE2, _gl.TEXTURE3, _gl.TEXTURE4][ind])
-      _gl.bindTexture(_gl.TEXTURE_2D, glTexture)
+
+      /// ------>
+
+      _gl.bindTexture(
+        _gl.TEXTURE_2D,
+        glTexture
+        //localStorage.getItem('changeTexture') === 'true' ? glTexture : newTexture
+      )
     })
 
     // draw faces:
@@ -873,7 +892,7 @@ const WebARRocksFaceShape2DHelper = (function () {
 
   // public methods:
   const that = {
-    init: function (spec) {
+    init: async function (spec) {
       _spec = Object.assign({}, _defaultSpec, spec)
 
       _landmarksStabilizer = WebARRocksLMStabilizer.instance({})
@@ -922,6 +941,10 @@ const WebARRocksFaceShape2DHelper = (function () {
 
     get_viewHeight: function () {
       return _spec.canvasVideo.height
+    },
+
+    get_create_glImageTexture: function () {
+      return create_glImageTexture
     },
   } //end that
   return that
