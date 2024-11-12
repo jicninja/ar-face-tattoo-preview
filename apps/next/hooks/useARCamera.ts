@@ -24,7 +24,7 @@ const useARCamera = ({
   const currentTexture = useRef<WebGLTexture>()
 
   const unOptimizedImagineTattoo = useCallback(async (prompt: string) => {
-    if (isTextureLoading || !isARLoading.current || !prompt) {
+    if (isTextureLoading || isARLoading.current || !prompt) {
       return
     }
 
@@ -78,7 +78,7 @@ const useARCamera = ({
       }
     }
 
-    function main() {
+    const main = () => {
       _canvasAR = document.getElementById(canvasEffectId) as HTMLCanvasElement
       _canvasVideo = document.getElementById(canvasCameraId) as HTMLCanvasElement
 
