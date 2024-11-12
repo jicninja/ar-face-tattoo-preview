@@ -26,10 +26,10 @@ export default function Page() {
     canvasEffectId: CANVAS_EFFECT_ID,
   })
 
-  const handleVoice = useCallback((speech: string) => {
+  const handleVoice = (speech: string) => {
     console.log('debug--->', speech)
     imagineTattoo(speech.replaceAll(' ', '_'))
-  }, [])
+  }
 
   return (
     <>

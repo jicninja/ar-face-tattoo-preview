@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             position: 'fixed',
             height: '100%',
             width: '100%',
+            opacity: 0.25,
             left: '0',
             top: '0',
             zIndex: 0,

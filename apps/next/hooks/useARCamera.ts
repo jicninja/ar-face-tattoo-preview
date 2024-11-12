@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
 import { SHAPEFACE } from './constants'
@@ -25,7 +25,7 @@ const useARCamera = ({
 
   const currentTexture = useRef<WebGLTexture>()
 
-  const unOptimizedImagineTattoo = useCallback(async (prompt: string) => {
+  const unOptimizedImagineTattoo = async (prompt: string) => {
     if (isTextureLoading || isARLoading.current || !prompt || savedPrompt.current === prompt) {
       return
     }
@@ -49,7 +49,7 @@ const useARCamera = ({
     } finally {
       setIsTextureLoading(false)
     }
-  }, [])
+  }
 
   const imagineTattoo = useDebounce(unOptimizedImagineTattoo, 100)
 

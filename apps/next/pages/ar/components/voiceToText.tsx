@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { Stack, H6, useDebounce, RecordButton } from '@my/ui'
+import { useState, useEffect, useRef } from 'react'
+import { Stack, H6, RecordButton } from '@my/ui'
 
 declare global {
   interface Window {
@@ -18,19 +18,17 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
   const recognitionRef = useRef<typeof window.SpeechRecognition>(null)
   const [note, setNote] = useState('')
 
-  const safeCallback = useDebounce(onVoice, 200)
-
-  const startListening = useCallback(() => {
+  const startListening = () => {
     recognitionRef.current?.start()
-  }, [])
+  }
 
-  const stopListening = useCallback(async () => {
+  const stopListening = async () => {
     recognitionRef.current?.stop()
 
     await new Promise((resolve) => setTimeout(resolve, 200))
 
-    safeCallback(note)
-  }, [recognitionRef, note])
+    //onVoice(note)
+  }
 
   useEffect(() => {
     if (isReady.current) {
@@ -48,6 +46,8 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
     recognition.onresult = (event: any) => {
       const transcript = event.results[event.resultIndex][0].transcript
       setNote(transcript)
+
+      onVoice(transcript)
     }
 
     recognition.onerror = (event: any) => {
