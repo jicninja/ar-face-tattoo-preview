@@ -80,9 +80,7 @@ const useARCamera = ({
     }
 
     // Init
-    setTimeout(() => {
-      main()
-    }, 100)
+    main()
   }, [])
 
   return {
