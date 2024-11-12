@@ -1,5 +1,5 @@
 import { Button } from 'tamagui'
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { Mic, CircleStop } from '@tamagui/lucide-icons'
 
 type RecordButtonProps = {
@@ -10,15 +10,15 @@ type RecordButtonProps = {
 export const RecordButton = ({ onRelease, onPress }: RecordButtonProps) => {
   const [isRecording, setIsRecording] = useState(false)
 
-  const handlePressIn = useCallback(() => {
+  const handlePressIn = () => {
     setIsRecording(true)
     onPress()
-  }, [onPress])
+  }
 
-  const handlePressOut = useCallback(() => {
+  const handlePressOut = () => {
     setIsRecording(false)
     onRelease()
-  }, [onRelease])
+  }
 
   return (
     <Button

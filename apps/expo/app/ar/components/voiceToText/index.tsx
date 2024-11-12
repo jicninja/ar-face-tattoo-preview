@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
-import { Stack, H6, useDebounce, RecordButton } from '@my/ui'
+import { Stack, H6, RecordButton } from '@my/ui'
 import Voice from '@react-native-voice/voice'
 
 const VoiceToText = ({ onVoice }) => {
   const isReady = useRef(false)
+  const noteRef = useRef<string>()
   const [note, setNote] = useState('')
-
-  const safeOnVoice = useDebounce(onVoice, 300)
 
   useEffect(() => {
     if (!isReady.current) {
       Voice.onSpeechResults = async (event: { value: string[] }) => {
         setNote(event.value[0])
+        noteRef.current = event.value[0]
       }
     }
 
@@ -36,9 +36,7 @@ const VoiceToText = ({ onVoice }) => {
 
       await new Promise((resolve) => setTimeout(resolve, 200))
 
-      if (note.length) {
-        safeOnVoice(note)
-      }
+      onVoice(note)
     } catch (error) {
       console.error(error)
     }

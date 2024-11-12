@@ -3,7 +3,6 @@ import { FloatingHeading, Author, Spinner } from '@my/ui'
 import { useARCamera } from '../../hooks/useARCamera'
 import { usePostMessage } from '../../hooks/usePostMessage'
 
-import { useCallback } from 'react'
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
 import VoiceToText from './components/voiceToText'
@@ -27,7 +26,6 @@ export default function Page() {
   })
 
   const handleVoice = (speech: string) => {
-    console.log('debug--->', speech)
     imagineTattoo(speech.replaceAll(' ', '_'))
   }
 
