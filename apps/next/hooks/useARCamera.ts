@@ -29,11 +29,18 @@ const useARCamera = ({
 
     setIsTextureLoading(true)
 
-    const { data } = await axios.get(`./api/imagine?prompt=${prompt}`)
+    try {
+      const { data } = await axios.get(`./api/imagine?prompt=${prompt}`)
 
-    currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
-      data.image
-    )
+      /*
+      currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
+        data.image
+      )
+
+      */
+    } catch (err) {
+      console.error(err)
+    }
 
     setIsTextureLoading(false)
   }, [])
@@ -55,6 +62,10 @@ const useARCamera = ({
           canvasAR: _canvasAR,
           shapes: [SHAPEFACE],
           updateCallback: async (spec: { textures: WebGLTexture[] }) => {
+            if (isTextureLoading) {
+              return 'pause'
+            }
+
             if (currentTexture.current) {
               spec.textures = [currentTexture.current]
             }
