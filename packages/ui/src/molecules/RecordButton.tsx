@@ -1,4 +1,4 @@
-import { Button } from '@my/ui'
+import { Button } from 'tamagui'
 import { useState, useCallback } from 'react'
 import { Mic, CircleStop } from '@tamagui/lucide-icons'
 
