@@ -575,18 +575,11 @@ const WebARRocksFaceShape2DHelper = (function () {
     _glv.flush()
   }
 
-  let newTexture
-
   async function draw_shape(landmarksPositions, shape) {
     if (_spec.updateCallback) {
       if ((await _spec.updateCallback(shape, create_glImageTexture)) === 'pause') {
         return
       }
-    }
-
-    //console.log('debug--->', _spec)
-
-    //return
 
     _gl.useProgram(shape.shp.program)
 
