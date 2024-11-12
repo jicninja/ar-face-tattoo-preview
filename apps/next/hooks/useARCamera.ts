@@ -32,11 +32,10 @@ const useARCamera = ({
 
     setIsTextureLoading(true)
 
-    isForcedPause.current = false
-
     try {
       const { data } = await axios.get(`./api/imagine`, { params: { prompt }, timeout: 600000 })
 
+      isForcedPause.current = false
       savedPrompt.current = prompt
 
       // Add a simple delay

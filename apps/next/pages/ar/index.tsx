@@ -1,17 +1,19 @@
-import { FloatingHeading, Author } from '@my/ui'
+import { FloatingHeading, Author, Spinner } from '@my/ui'
 
 import { useARCamera } from '../../hooks/useARCamera'
 import { usePostMessage } from '../../hooks/usePostMessage'
 
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
-
-import { Spinner } from 'tamagui'
+import VoiceToText from './components/voiceToText'
+import { Platform } from 'react-native'
 
 const CANVAS_CAMERA_ID = 'WebARRocksFaceCanvasVideo'
 const CANVAS_EFFECT_ID = 'WebARRocksFaceCanvasAR'
 
 export default function Page() {
+  const isWeb = Platform.OS === 'web'
+
   usePostMessage({
     onMessage: ({ data }) => {
       imagineTattoo(data)
@@ -40,6 +42,8 @@ export default function Page() {
         />
       ) : null}
       <Author />
+
+      {isWeb ? <VoiceToText /> : null}
 
       <Canvas overlay id={CANVAS_EFFECT_ID} />
       <Canvas id={CANVAS_CAMERA_ID} />

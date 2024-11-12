@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Stack, H6, useDebounce } from '@my/ui'
-import { RecordButton } from '@my/ui'
+import { Stack, H6, useDebounce, RecordButton } from '@my/ui'
 import Voice from '@react-native-voice/voice'
 
 const VoiceToText = ({ onVoice }) => {

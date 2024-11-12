@@ -25,7 +25,8 @@ export const RecordButton = ({ onRelease, onPress }: RecordButtonProps) => {
       backgroundColor={'$green10Dark'}
       width={'$8'}
       height={'$8'}
-      size={'$7'}
+      padding={'$0'}
+      size={'$9'}
       borderRadius={'$12'}
       onPressOut={handlePressOut}
       onPressIn={handlePressIn}
