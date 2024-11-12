@@ -12,7 +12,11 @@ const CANVAS_CAMERA_ID = 'WebARRocksFaceCanvasVideo'
 const CANVAS_EFFECT_ID = 'WebARRocksFaceCanvasAR'
 
 export default function Page() {
-  usePostMessage()
+  usePostMessage({
+    onMessage: ({ data }) => {
+      imagineTattoo(data)
+    },
+  })
 
   const { isTextureLoading, imagineTattoo } = useARCamera({
     canvasCameraId: CANVAS_CAMERA_ID,

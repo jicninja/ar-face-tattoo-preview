@@ -1,9 +1,13 @@
 import { useEffect } from 'react'
 
-const usePostMessage = () => {
+type usePostMessageProps = {
+  onMessage?: (data: MessageEvent) => void
+}
+
+const usePostMessage = ({ onMessage }: usePostMessageProps) => {
   useEffect(() => {
-    const handleEvent = (message) => {
-      alert(message.data)
+    const handleEvent: EventListener = (message) => {
+      onMessage?.(message as MessageEvent)
     }
 
     document.addEventListener('message', handleEvent)
