@@ -24,7 +24,7 @@ const VoiceToText = ({ onVoice }) => {
 
   const startListening = async () => {
     try {
-      await Voice.start('es-ES')
+      await Voice.start('en-US')
     } catch (error) {
       console.error(error)
     }
