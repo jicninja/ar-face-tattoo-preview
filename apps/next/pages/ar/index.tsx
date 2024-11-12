@@ -3,6 +3,7 @@ import { FloatingHeading, Author, Spinner } from '@my/ui'
 import { useARCamera } from '../../hooks/useARCamera'
 import { usePostMessage } from '../../hooks/usePostMessage'
 
+import { useCallback } from 'react'
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
 import VoiceToText from './components/voiceToText'
@@ -25,6 +26,11 @@ export default function Page() {
     canvasEffectId: CANVAS_EFFECT_ID,
   })
 
+  const handleVoice = useCallback((speech: string) => {
+    console.log('debug--->', speech)
+    imagineTattoo(speech.replaceAll(' ', '_'))
+  }, [])
+
   return (
     <>
       <CoreScripts />
@@ -43,7 +49,7 @@ export default function Page() {
       ) : null}
       <Author />
 
-      {isWeb ? <VoiceToText /> : null}
+      {isWeb ? <VoiceToText onVoice={handleVoice} /> : null}
 
       <Canvas overlay id={CANVAS_EFFECT_ID} />
       <Canvas id={CANVAS_CAMERA_ID} />

@@ -9,16 +9,16 @@ declare global {
 }
 
 type VoiceToTextProps = {
-  onSpeechEnds?: (speech: string) => void
+  onVoice: (speech: string) => void
 }
 
-const VoiceToText = ({ onSpeechEnds = () => {} }: VoiceToTextProps) => {
+const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
   const isReady = useRef(false)
 
   const recognitionRef = useRef<typeof window.SpeechRecognition>(null)
   const [note, setNote] = useState('')
 
-  const safeCallback = useDebounce(onSpeechEnds, 200)
+  const safeCallback = useDebounce(onVoice, 200)
 
   const startListening = useCallback(() => {
     recognitionRef.current?.start()
@@ -29,8 +29,8 @@ const VoiceToText = ({ onSpeechEnds = () => {} }: VoiceToTextProps) => {
 
     await new Promise((resolve) => setTimeout(resolve, 200))
 
-    safeCallback?.(note)
-  }, [])
+    safeCallback(note)
+  }, [recognitionRef, note])
 
   useEffect(() => {
     if (isReady.current) {
