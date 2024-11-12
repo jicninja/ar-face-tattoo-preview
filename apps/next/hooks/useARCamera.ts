@@ -23,22 +23,24 @@ const useARCamera = ({
   const currentTexture = useRef<WebGLTexture>()
 
   const imagineTattoo = useCallback(async (prompt: string) => {
-    if (isTextureLoading || isARLoading.current || !prompt) {
+    if (isTextureLoading || !prompt) {
       return
     }
 
-    setIsTextureLoading(true)
+    //setIsTextureLoading(true)
 
     try {
       const { data } = await axios.get(`./api/imagine`, { params: { prompt }, timeout: 600000 })
 
-      currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
-        data.image
-      )
+      if (!isARLoading.current) {
+        currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
+          data.image
+        )
+      }
     } catch (err) {
       console.error(err)
     } finally {
-      setIsTextureLoading(false)
+      //setIsTextureLoading(false)
     }
   }, [])
 
