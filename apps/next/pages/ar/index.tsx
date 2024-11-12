@@ -6,7 +6,7 @@ import { usePostMessage } from '../../hooks/usePostMessage'
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
 
-import { Spinner, Button } from 'tamagui'
+import { Spinner } from 'tamagui'
 
 const CANVAS_CAMERA_ID = 'WebARRocksFaceCanvasVideo'
 const CANVAS_EFFECT_ID = 'WebARRocksFaceCanvasAR'
@@ -41,17 +41,6 @@ export default function Page() {
       ) : null}
       <Author />
 
-      <Button
-        disabled={isTextureLoading}
-        onPress={() => imagineTattoo('Dragon_Face')}
-        variant="outlined"
-        position="absolute"
-        zIndex={2}
-        bottom={'$2'}
-        left={'$2'}
-      >
-        Imagine Dragon Face Tattoo
-      </Button>
       <Canvas overlay id={CANVAS_EFFECT_ID} />
       <Canvas id={CANVAS_CAMERA_ID} />
     </>

@@ -1,21 +1,25 @@
-import { useState, useEffect } from 'react'
-import { View, Text, Button } from 'react-native'
-import { Stack } from 'tamagui'
+import { useState, useEffect, useRef } from 'react'
+import { Stack, H6, useDebounce } from 'tamagui'
+import { RecordButton } from '@my/ui'
 import Voice from '@react-native-voice/voice'
 
-const VoiceToText = () => {
+const VoiceToText = ({ onVoice }) => {
+  const isReady = useRef(false)
   const [isListening, setIsListening] = useState(false)
   const [note, setNote] = useState('')
 
+  const safeOnVoice = useDebounce(onVoice, 300)
+
   useEffect(() => {
-    // Set up event listeners
-    Voice.onSpeechResults = (event) => {
-      setNote(event.value[0]) // Capture the recognized speech
-      stopListening()
+    if (!isReady.current) {
+      Voice.onSpeechResults = async (event: { value: string[] }) => {
+        setNote(event.value[0])
+      }
     }
 
+    isReady.current = true
+
     return () => {
-      // Clean up listeners on unmount
       Voice.destroy().then(Voice.removeAllListeners)
     }
   }, [])
@@ -23,7 +27,7 @@ const VoiceToText = () => {
   const startListening = async () => {
     setIsListening(true)
     try {
-      await Voice.start('en-US') // Start listening in English
+      await Voice.start('es-ES')
     } catch (error) {
       console.error(error)
     }
@@ -32,20 +36,30 @@ const VoiceToText = () => {
   const stopListening = async () => {
     setIsListening(false)
     try {
-      await Voice.stop() // Stop listening
+      await Voice.stop()
+
+      await new Promise((resolve) => setTimeout(resolve, 200))
+
+      if (note.length) {
+        safeOnVoice(note)
+      }
     } catch (error) {
       console.error(error)
     }
   }
 
   return (
-    <Stack zIndex={2} style={{ padding: 20 }}>
-      <Text style={{ fontSize: 20 }}>{isListening ? 'Listening...' : 'Say something!'}</Text>
-      {note ? <Text style={{ fontSize: 18 }}>You said: {note}</Text> : null}
-      <Button
-        title={isListening ? 'Stop Listening' : 'Start Listening'}
-        onPress={isListening ? stopListening : startListening}
-      />
+    <Stack
+      zIndex={2}
+      position={'absolute'}
+      width={'100%'}
+      alignItems={'center'}
+      bottom={'$10'}
+      gap={'$2'}
+    >
+      {note ? <H6 fontSize={'$1'}>{note}</H6> : null}
+
+      <RecordButton onPress={startListening} onRelease={stopListening} />
     </Stack>
   )
 }

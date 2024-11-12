@@ -36,6 +36,9 @@ const useARCamera = ({
 
       savedPrompt.current = prompt
 
+      // Add a simple delay
+      //await new Promise((resolve) => setTimeout(resolve, 200))
+
       currentTexture.current = await WebARRocksFaceShape2DHelper.get_create_glImageTexture()(
         data.image
       )
