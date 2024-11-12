@@ -1,6 +1,6 @@
 import { FloatingHeading, Author } from '@my/ui'
 
-import { useARCamera } from './hooks/useARCamera'
+import { useARCamera } from '../../hooks/useARCamera'
 
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
