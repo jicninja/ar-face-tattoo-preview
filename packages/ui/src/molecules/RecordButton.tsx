@@ -1,4 +1,4 @@
-import { Button } from 'tamagui'
+import { Button } from '@my/ui'
 import { useState, useCallback } from 'react'
 import { Mic, CircleStop } from '@tamagui/lucide-icons'
 
@@ -20,10 +20,9 @@ export const RecordButton = ({ onRelease, onPress }: RecordButtonProps) => {
     onRelease()
   }, [onRelease])
 
-
   return (
     <Button
-    backgroundColor={'$green10Dark'}
+      backgroundColor={'$green10Dark'}
       width={'$8'}
       height={'$8'}
       size={'$7'}

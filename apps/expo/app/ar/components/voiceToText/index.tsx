@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
-import { Stack, H6, useDebounce } from 'tamagui'
+import { Stack, H6, useDebounce } from '@my/ui'
 import { RecordButton } from '@my/ui'
 import Voice from '@react-native-voice/voice'
 
 const VoiceToText = ({ onVoice }) => {
   const isReady = useRef(false)
-  const [isListening, setIsListening] = useState(false)
   const [note, setNote] = useState('')
 
   const safeOnVoice = useDebounce(onVoice, 300)
@@ -25,7 +24,6 @@ const VoiceToText = ({ onVoice }) => {
   }, [])
 
   const startListening = async () => {
-    setIsListening(true)
     try {
       await Voice.start('es-ES')
     } catch (error) {
@@ -34,7 +32,6 @@ const VoiceToText = ({ onVoice }) => {
   }
 
   const stopListening = async () => {
-    setIsListening(false)
     try {
       await Voice.stop()
 

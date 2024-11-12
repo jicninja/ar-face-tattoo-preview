@@ -7,7 +7,7 @@ export const FloatingHeading = () => {
     <Stack padding={'$4'} position={Platform.OS === 'web' ? 'fixed' : 'absolute'} zIndex={2}>
       <Stack width={196} aspectRatio={128 / 15}>
         <Logo />
-        <H5 color={'white'}>AR Face Tattoo</H5>
+        <H5 color={'$white1'}>AR Face Tattoo</H5>
       </Stack>
     </Stack>
   )

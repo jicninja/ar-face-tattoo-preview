@@ -11,7 +11,7 @@ export const Author = () => {
       right={0}
       padding={'$4'}
     >
-      <H6>by Ignacio Castro</H6>
+      <H6 fontSize={'$1'}>by Ignacio Castro</H6>
     </Stack>
   )
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import axios from 'axios'
 
 import { SHAPEFACE } from './constants'
-import { useDebounce } from 'tamagui'
+import { useDebounce } from '@my/ui'
 
 declare global {
   var WebARRocksResizer: any
