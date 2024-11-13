@@ -13,6 +13,7 @@ import {
   Stack,
   Logo,
   H4,
+  useMedia,
 } from '@my/ui'
 import { Play } from '@tamagui/lucide-icons'
 import { Platform } from 'react-native'
@@ -20,6 +21,8 @@ import { useLink } from 'solito/navigation'
 
 export function HomeScreen() {
   const isWeb = Platform.OS === 'web'
+
+  const media = useMedia()
 
   const linkProps = useLink({
     href: `/ar`,
@@ -29,7 +32,7 @@ export function HomeScreen() {
     <ScrollView
       gap="$8"
       contentContainerStyle={{
-        padding: '$6',
+        padding: media.sm ? '$4' : '$0',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
