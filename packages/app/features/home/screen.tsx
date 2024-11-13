@@ -29,6 +29,7 @@ export function HomeScreen() {
     <ScrollView
       gap="$8"
       contentContainerStyle={{
+        padding: '$6',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -40,7 +41,7 @@ export function HomeScreen() {
           AR Face Tattoo
         </H1>
 
-        <YStack maxWidth={600} gap={'$2'} paddingBottom={isWeb ? '$6' : '$3'}>
+        <YStack maxWidth={350} gap={'$2'} paddingBottom={isWeb ? '$6' : '$3'}>
           <H3 paddingBottom={'$4'} col="$color10" ta="center">
             An Augmented Reality Face Tattoo Previewer prototype developed by Ignacio Castro for
             CoCreate.
