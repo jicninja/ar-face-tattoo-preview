@@ -15,7 +15,7 @@ import {
   H4,
   useMedia,
 } from '@my/ui'
-import { Play } from '@tamagui/lucide-icons'
+import { Play, Download } from '@tamagui/lucide-icons'
 import { Platform } from 'react-native'
 import { useLink } from 'solito/navigation'
 
@@ -95,7 +95,30 @@ export function HomeScreen() {
           >
             <H4 fontSize={'$5'}>Here's the Source Code! It's Open Source ♥️</H4>
           </Anchor>
+
+          {isWeb ? (
+            <YStack flex={1}>
+              <Separator />
+
+              <Anchor
+                paddingTop={'$4'}
+                textAlign={'center'}
+                href="/build/arfacetattoo.apk"
+                target="_blank"
+                textDecorationLine={'none'}
+                flex={1}
+                gap={'$2'}
+              >
+                <Download color={'$green12'} position={'relative'} top={'$1'} />
+
+                <H4 color={'$green12'} fontSize={'$5'} paddingLeft={'$3'}>
+                  Download Android Build
+                </H4>
+              </Anchor>
+            </YStack>
+          ) : null}
         </YStack>
+
         <Separator />
 
         <XStack gap={'$3'}>

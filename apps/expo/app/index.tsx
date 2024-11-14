@@ -1,4 +1,6 @@
 import { HomeScreen } from 'app/features/home/screen'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { StyleSheet } from 'react-native'
 import { Stack } from 'expo-router'
 
 export default function Screen() {
@@ -10,7 +12,15 @@ export default function Screen() {
           title: '',
         }}
       />
-      <HomeScreen />
+      <SafeAreaView style={styles.container}>
+        <HomeScreen />
+      </SafeAreaView>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+})
