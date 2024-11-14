@@ -11186,7 +11186,6 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-native: "npm:0.74.2"
     react-native-gesture-handler: "npm:~2.16.2"
-    react-native-safe-area-context: "npm:4.10.4"
     react-native-screens: "npm:~3.31.1"
     react-native-svg: "npm:15.3.0"
     react-native-web: "npm:~0.19.12"

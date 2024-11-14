@@ -31,9 +31,10 @@ export function HomeScreen() {
   return (
     <ScrollView
       gap="$8"
+      flex={1}
       contentContainerStyle={{
-        padding: media.sm ? '$4' : '$0',
-        flex: 1,
+        paddingHorizontal: media.sm ? '$4' : '$0',
+        paddingVertical: '$2',
         alignItems: 'center',
         justifyContent: 'center',
       }}

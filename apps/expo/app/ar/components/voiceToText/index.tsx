@@ -4,14 +4,13 @@ import Voice from '@react-native-voice/voice'
 
 const VoiceToText = ({ onVoice }) => {
   const isReady = useRef(false)
-  const noteRef = useRef<string>()
+  const [isListening, setIsListening] = useState(false)
   const [note, setNote] = useState('')
 
   useEffect(() => {
     if (!isReady.current) {
       Voice.onSpeechResults = async (event: { value: string[] }) => {
         setNote(event.value[0])
-        noteRef.current = event.value[0]
       }
     }
 
@@ -24,6 +23,7 @@ const VoiceToText = ({ onVoice }) => {
 
   const startListening = async () => {
     try {
+      setIsListening(true)
       await Voice.start('en-US')
     } catch (error) {
       console.error(error)
@@ -33,14 +33,17 @@ const VoiceToText = ({ onVoice }) => {
   const stopListening = async () => {
     try {
       await Voice.stop()
-
-      await new Promise((resolve) => setTimeout(resolve, 200))
-
-      onVoice(note)
+      setIsListening(false)
     } catch (error) {
       console.error(error)
     }
   }
+
+  useEffect(() => {
+    if (note && note.length && !isListening) {
+      onVoice(note)
+    }
+  }, [note, isListening])
 
   return (
     <Stack

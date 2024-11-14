@@ -14,20 +14,19 @@ type VoiceToTextProps = {
 
 const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
   const isReady = useRef(false)
+  const [isListening, setIsListening] = useState(false)
 
   const recognitionRef = useRef<typeof window.SpeechRecognition>(null)
   const [note, setNote] = useState('')
 
   const startListening = () => {
+    setIsListening(true)
     recognitionRef.current?.start()
   }
 
   const stopListening = async () => {
     recognitionRef.current?.stop()
-
-    await new Promise((resolve) => setTimeout(resolve, 200))
-
-    //onVoice(note)
+    setIsListening(false)
   }
 
   useEffect(() => {
@@ -46,8 +45,6 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
     recognition.onresult = (event: any) => {
       const transcript = event.results[event.resultIndex][0].transcript
       setNote(transcript)
-
-      onVoice(transcript)
     }
 
     recognition.onerror = (event: any) => {
@@ -56,6 +53,12 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
 
     isReady.current = true
   }, [])
+
+  useEffect(() => {
+    if (note && note.length && !isListening) {
+      onVoice(note)
+    }
+  }, [note, isListening])
 
   return (
     <Stack
