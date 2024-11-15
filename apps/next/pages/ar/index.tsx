@@ -37,7 +37,7 @@ export default function Page() {
   }
 
   useEffect(() => {
-    if (isTextureLoading) {
+    if (!isTextureLoading) {
       window?.ReactNativeWebView?.postMessage('isTextureLoading')
     }
   }, [isTextureLoading])

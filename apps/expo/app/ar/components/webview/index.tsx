@@ -1,6 +1,6 @@
 import { WebView } from 'react-native-webview'
 import { StyleSheet } from 'react-native'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { VoiceToText } from '../voiceToText'
 
 const URL = 'https://www.arfacetattoo.online/ar'
@@ -16,19 +16,27 @@ function getInjectableJSMessage(message) {
 }
 
 export const ARView = () => {
+  const [isDisabled, setIsDisabled] = useState(false)
   const webviewRef = useRef<WebView>(null)
 
   const sendDataToWebView = (message: string) => {
     webviewRef.current?.injectJavaScript(getInjectableJSMessage(message))
+    setIsDisabled(true)
   }
 
   return (
     <>
-      <VoiceToText onVoice={(text) => sendDataToWebView(text.replaceAll(' ', '_'))} />
+      <VoiceToText
+        disabled={isDisabled}
+        onVoice={(text) => sendDataToWebView(text.replaceAll(' ', '_'))}
+      />
       <WebView
         allowsInlineMediaPlayback
         ref={webviewRef}
         javaScriptEnabled
+        onMessage={() => {
+          setIsDisabled(false)
+        }}
         style={styles.webview}
         source={{ uri: URL }}
       />
