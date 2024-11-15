@@ -22,6 +22,12 @@ export const ARView = () => {
   const sendDataToWebView = (message: string) => {
     webviewRef.current?.injectJavaScript(getInjectableJSMessage(message))
     setIsDisabled(true)
+
+    setTimeout(() => {
+      if (isDisabled) {
+        setIsDisabled(false)
+      }
+    }, 10000)
   }
 
   return (
