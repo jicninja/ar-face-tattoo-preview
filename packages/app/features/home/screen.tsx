@@ -14,14 +14,12 @@ import {
   Logo,
   H4,
   useMedia,
+  isWeb,
 } from '@my/ui'
 import { Play, Download } from '@tamagui/lucide-icons'
-import { Platform } from 'react-native'
 import { useLink } from 'solito/navigation'
 
 export function HomeScreen() {
-  const isWeb = Platform.OS === 'web'
-
   const media = useMedia()
 
   const linkProps = useLink({
@@ -45,7 +43,7 @@ export function HomeScreen() {
           AR Face Tattoo
         </H1>
 
-        <YStack maxWidth={350} gap={'$2'} paddingBottom={isWeb ? '$6' : '$3'}>
+        <YStack maxWidth={media.sm ? 350 : 600} gap={'$2'} paddingBottom={isWeb ? '$6' : '$3'}>
           <H3 paddingBottom={'$4'} col="$color10" ta="center">
             An Augmented Reality Face Tattoo Previewer prototype developed by Ignacio Castro for
             CoCreate.

@@ -10,9 +10,10 @@ declare global {
 
 type VoiceToTextProps = {
   onVoice: (speech: string) => void
+  disabled?: boolean
 }
 
-const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
+const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
   const isReady = useRef(false)
   const [isListening, setIsListening] = useState(false)
 
@@ -20,8 +21,10 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
   const [note, setNote] = useState('')
 
   const startListening = () => {
-    setIsListening(true)
-    recognitionRef.current?.start()
+    if (!isListening) {
+      setIsListening(true)
+      recognitionRef.current?.start()
+    }
   }
 
   const stopListening = async () => {
@@ -39,7 +42,7 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
 
     const recognition = recognitionRef.current as typeof SpeechRecognition
 
-    recognition.lang = 'en-US'
+    recognition.lang = navigator.language
     recognition.continuous = true
 
     recognition.onresult = (event: any) => {
@@ -67,11 +70,11 @@ const VoiceToText = ({ onVoice }: VoiceToTextProps) => {
       width={'100%'}
       alignItems={'center'}
       bottom={'$10'}
-      gap={'$2'}
+      gap={'$4'}
     >
-      {note ? <H6 fontSize={'$1'}>{note}</H6> : null}
+      {note ? <H6 fontSize={'$3'}>{note}</H6> : null}
 
-      <RecordButton onPress={startListening} onRelease={stopListening} />
+      <RecordButton disabled={disabled} onPress={startListening} onRelease={stopListening} />
     </Stack>
   )
 }

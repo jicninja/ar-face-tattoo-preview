@@ -1,8 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import { Stack, H6, RecordButton } from '@my/ui'
 import Voice from '@react-native-voice/voice'
+import { Platform, NativeModules } from 'react-native'
 
-const VoiceToText = ({ onVoice }) => {
+const deviceLanguage =
+  Platform.OS === 'ios'
+    ? NativeModules.SettingsManager.settings.AppleLocale ||
+      NativeModules.SettingsManager.settings.AppleLanguages[0]
+    : NativeModules.I18nManager.localeIdentifier
+
+type VoiceToTextProps = {
+  onVoice: (speech: string) => void
+  disabled?: boolean
+}
+
+const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
   const isReady = useRef(false)
   const [isListening, setIsListening] = useState(false)
   const [note, setNote] = useState('')
@@ -21,10 +33,12 @@ const VoiceToText = ({ onVoice }) => {
     }
   }, [])
 
+  const lang = deviceLanguage.replaceAll('_', '-')
+
   const startListening = async () => {
     try {
       setIsListening(true)
-      await Voice.start('en-US')
+      await Voice.start(lang)
     } catch (error) {
       console.error(error)
     }
@@ -52,11 +66,11 @@ const VoiceToText = ({ onVoice }) => {
       width={'100%'}
       alignItems={'center'}
       bottom={'$10'}
-      gap={'$2'}
+      gap={'$4'}
     >
-      {note ? <H6 fontSize={'$1'}>{note}</H6> : null}
+      {note ? <H6 fontSize={'$3'}>{note}</H6> : null}
 
-      <RecordButton onPress={startListening} onRelease={stopListening} />
+      <RecordButton disabled={disabled} onPress={startListening} onRelease={stopListening} />
     </Stack>
   )
 }

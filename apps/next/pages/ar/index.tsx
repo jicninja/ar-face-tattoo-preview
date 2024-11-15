@@ -1,19 +1,26 @@
-import { FloatingHeading, Author, Spinner } from '@my/ui'
+import { FloatingHeading, Author, Spinner, isWeb } from '@my/ui'
 
 import { useARCamera } from '../../hooks/useARCamera'
 import { usePostMessage } from '../../hooks/usePostMessage'
 
+import { useEffect } from 'react'
+
 import Canvas from './components/canvas'
 import CoreScripts from './components/coreScripts'
 import VoiceToText from './components/voiceToText'
-import { Platform } from 'react-native'
 
 const CANVAS_CAMERA_ID = 'WebARRocksFaceCanvasVideo'
 const CANVAS_EFFECT_ID = 'WebARRocksFaceCanvasAR'
 
-export default function Page() {
-  const isWeb = Platform.OS === 'web'
+declare global {
+  interface Window {
+    ReactNativeWebView: {
+      postMessage: (data: string) => void
+    }
+  }
+}
 
+export default function Page() {
   usePostMessage({
     onMessage: ({ data }) => {
       imagineTattoo(data)
@@ -29,6 +36,12 @@ export default function Page() {
     imagineTattoo(speech.replaceAll(' ', '_'))
   }
 
+  useEffect(() => {
+    if (isTextureLoading) {
+      window?.ReactNativeWebView?.postMessage('isTextureLoading')
+    }
+  }, [isTextureLoading])
+
   return (
     <>
       <CoreScripts />
@@ -37,6 +50,11 @@ export default function Page() {
 
       {isTextureLoading ? (
         <Spinner
+          enterStyle={{
+            opacity: 0,
+            scale: 0,
+          }}
+          animation={'1000ms'}
           color={'$white1'}
           position="absolute"
           right={'$4'}
@@ -47,7 +65,7 @@ export default function Page() {
       ) : null}
       <Author />
 
-      {isWeb ? <VoiceToText onVoice={handleVoice} /> : null}
+      {isWeb ? <VoiceToText disabled={isTextureLoading} onVoice={handleVoice} /> : null}
 
       <Canvas overlay id={CANVAS_EFFECT_ID} />
       <Canvas id={CANVAS_CAMERA_ID} />
