@@ -24,6 +24,10 @@ const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
       Voice.onSpeechResults = async (event: { value: string[] }) => {
         setNote(event.value[0])
       }
+
+      Voice.onSpeechError = () => {
+        setIsListening(false)
+      }
     }
 
     isReady.current = true
@@ -40,6 +44,7 @@ const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
       setIsListening(true)
       await Voice.start(lang)
     } catch (error) {
+      setIsListening(false)
       console.error(error)
     }
   }
@@ -49,6 +54,7 @@ const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
       await Voice.stop()
       setIsListening(false)
     } catch (error) {
+      setIsListening(false)
       console.error(error)
     }
   }

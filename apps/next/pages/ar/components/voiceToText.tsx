@@ -14,7 +14,6 @@ type VoiceToTextProps = {
 }
 
 const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
-  const isReady = useRef(false)
   const [isListening, setIsListening] = useState(false)
 
   const recognitionRef = useRef<typeof window.SpeechRecognition>(null)
@@ -22,7 +21,8 @@ const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
 
   const startListening = () => {
     if (!isListening) {
-      setIsListening(true)
+      console.log('play')
+
       recognitionRef.current?.start()
     }
   }
@@ -33,16 +33,13 @@ const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
   }
 
   useEffect(() => {
-    if (isReady.current) {
-      return
-    }
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
     recognitionRef.current = new SpeechRecognition()
 
     const recognition = recognitionRef.current as typeof SpeechRecognition
 
-    recognition.lang = navigator.language
+    recognition.lang = navigator.language || 'en-US'
     recognition.continuous = true
 
     recognition.onresult = (event: any) => {
@@ -50,11 +47,14 @@ const VoiceToText = ({ onVoice, disabled }: VoiceToTextProps) => {
       setNote(transcript)
     }
 
-    recognition.onerror = (event: any) => {
-      console.error('Error occurred in recognition: ' + event.error)
+    recognition.onstart = () => {
+      setIsListening(true)
     }
 
-    isReady.current = true
+    recognition.onerror = (event: any) => {
+      setIsListening(false)
+      console.error('Error occurred in recognition: ' + event.error)
+    }
   }, [])
 
   useEffect(() => {
