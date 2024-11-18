@@ -20,21 +20,23 @@ export const ARView = () => {
   const webviewRef = useRef<WebView>(null)
 
   const sendDataToWebView = (message: string) => {
-    webviewRef.current?.injectJavaScript(getInjectableJSMessage(message))
-    setIsDisabled(true)
+    if (message) {
+      webviewRef.current?.injectJavaScript(getInjectableJSMessage(message))
+      setIsDisabled(true)
 
-    setTimeout(() => {
-      if (isDisabled) {
-        setIsDisabled(false)
-      }
-    }, 10000)
+      setTimeout(() => {
+        if (isDisabled) {
+          setIsDisabled(false)
+        }
+      }, 10000)
+    }
   }
 
   return (
     <>
       <VoiceToText
         disabled={isDisabled}
-        onVoice={(text) => sendDataToWebView(text.replaceAll(' ', '_'))}
+        onVoice={(text) => sendDataToWebView(text.replaceAll(' ', '_').trim())}
       />
       <WebView
         allowsInlineMediaPlayback
