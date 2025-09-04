@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <title>AR Face Tattoo Preview</title>
         <meta
           name="description"
-          content="An Augmented Reality Tattoo Previewer Proof of Concept by Ignacio Castro for CoCreate powered by AI"
+          content="An Augmented Reality Tattoo Previewer Proof of Concept by Ignacio Castro powered by AI"
         />
         <link rel="icon" href="/favicon.ico" />
         <script

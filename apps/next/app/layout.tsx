@@ -4,7 +4,7 @@ import { NextTamaguiProvider } from './NextTamaguiProvider'
 export const metadata: Metadata = {
   title: 'AR Face Tattoo Preview',
   description:
-    'An Augmented Reality Tattoo Previewer Proof of Concept by Ignacio Castro for CoCreate powered by AI',
+    'An Augmented Reality Tattoo Previewer Proof of Concept by Ignacio Castro powered by AI',
   icons: '/favicon.ico',
 }
 
