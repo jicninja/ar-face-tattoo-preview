@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "AR Face Tattoo",
-    "slug": "ArFaceTattooPreviewCoCreate",
-    "scheme": "ArFaceTattooPreviewCoCreate",
+    "slug": "ArFaceTattooPreview",
+    "scheme": "ArFaceTattooPreview",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -1,5 +1,5 @@
 {
-  "name": "cocreate-ar-face-tattoo",
+  "name": "ar-face-tattoo",
   "private": true,
   "workspaces": [
     "./apps/*",

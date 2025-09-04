@@ -45,9 +45,7 @@ export function HomeScreen() {
 
         <YStack maxWidth={media.sm ? 350 : 600} gap={'$2'} paddingBottom={isWeb ? '$6' : '$3'}>
           <H3 paddingBottom={'$4'} col="$color10" ta="center">
-            An Augmented Reality Face Tattoo Previewer prototype developed by Ignacio Castro for
-            CoCreate.
-          </H3>
+            An Augmented Reality Face Tattoo Previewer prototype developed by Ignacio Castro          </H3>
 
           <Separator />
 
@@ -86,7 +84,7 @@ export function HomeScreen() {
           ) : null}
 
           <Anchor
-            href="https://github.com/jicninja/cocreate-ar-face-tattoo-preview"
+            href="https://github.com/jicninja/ar-face-tattoo-preview"
             target="_blank"
             marginTop={isWeb ? '$4' : '$2'}
             textDecorationLine={'none'}
