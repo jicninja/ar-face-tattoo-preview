@@ -7692,6 +7692,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ar-face-tattoo@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "ar-face-tattoo@workspace:."
+  dependencies:
+    "@babel/runtime": "npm:^7.24.6"
+    "@biomejs/biome": "npm:^1.9.3"
+    "@tamagui/cli": "npm:^1.116.14"
+    axios: "npm:^1.7.7"
+    check-dependency-version-consistency: "npm:^4.1.0"
+    eslint: "npm:^9.3.0"
+    expo: "npm:~51.0.28"
+    husky: "npm:^9.1.6"
+    node-gyp: "npm:^10.1.0"
+    prettier: "npm:^3.3.3"
+    react: "npm:18.2.0"
+    react-native: "npm:0.74.5"
+    react-native-svg: "npm:15.3.0"
+    turbo: "npm:^1.13.4"
+    typescript: "npm:^5.6.2"
+    vitest: "npm:^2.1.1"
+  languageName: unknown
+  linkType: soft
+
 "are-we-there-yet@npm:^2.0.0":
   version: 2.0.0
   resolution: "are-we-there-yet@npm:2.0.0"
@@ -8886,29 +8909,6 @@ __metadata:
   checksum: 10/d9c79efba655f0bf601ab299c57eb54cbaa9860fb011aee9d89ed5ac0d12df1660ab7642fddaabb9a26b7eff0e117d4520512cb70798319ff5d30a111b5310c2
   languageName: node
   linkType: hard
-
-"cocreate-ar-face-tattoo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "cocreate-ar-face-tattoo@workspace:."
-  dependencies:
-    "@babel/runtime": "npm:^7.24.6"
-    "@biomejs/biome": "npm:^1.9.3"
-    "@tamagui/cli": "npm:^1.116.14"
-    axios: "npm:^1.7.7"
-    check-dependency-version-consistency: "npm:^4.1.0"
-    eslint: "npm:^9.3.0"
-    expo: "npm:~51.0.28"
-    husky: "npm:^9.1.6"
-    node-gyp: "npm:^10.1.0"
-    prettier: "npm:^3.3.3"
-    react: "npm:18.2.0"
-    react-native: "npm:0.74.5"
-    react-native-svg: "npm:15.3.0"
-    turbo: "npm:^1.13.4"
-    typescript: "npm:^5.6.2"
-    vitest: "npm:^2.1.1"
-  languageName: unknown
-  linkType: soft
 
 "code-block-writer@npm:^10.1.1":
   version: 10.1.1
